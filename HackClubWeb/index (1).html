@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — HackClub Batumi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ─── LOGIN SCREEN ─── -->
+<div id="login-screen">
+  <div class="login-card">
+    <span class="login-brand">// HACKCLUB BATUMI</span>
+    <div class="login-title">ADMIN</div>
+    <div class="login-sub">Restricted access. Admin credentials only.</div>
+    <div class="form-field">
+      <label class="form-label">Email</label>
+      <input class="form-input" id="admin-email" type="email" placeholder="admin@hackclub-batumi.ge" autocomplete="email">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Password</label>
+      <input class="form-input" id="admin-password" type="password" placeholder="••••••••"
+        autocomplete="current-password" onkeydown="if(event.key==='Enter')adminLogin()">
+    </div>
+    <div class="form-error" id="admin-login-error" style="display:none"></div>
+    <button class="btn btn-red full-btn" onclick="adminLogin()">Log In →</button>
+  </div>
+</div>
+
+<!-- ─── ADMIN PANEL ─── -->
+<div id="admin-panel" style="display:none; min-height:100vh; display:none">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-logo">// HACKCLUB<span>ADMIN PANEL</span></div>
+    <nav class="sb-nav">
+      <div class="sb-section-label">Overview</div>
+      <button class="sb-link active" data-section="dashboard" onclick="switchSection('dashboard')">
+        <span class="sb-icon">⊞</span><span>Dashboard</span>
+      </button>
+      <button class="sb-link" data-section="applications" onclick="switchSection('applications')">
+        <span class="sb-icon">◈</span><span>Applications</span>
+        <span class="sb-badge" id="sb-badge-apps" style="display:none">0</span>
+      </button>
+
+      <div class="sb-section-label">Content</div>
+      <button class="sb-link" data-section="projects" onclick="switchSection('projects')">
+        <span class="sb-icon">⟨/⟩</span><span>Projects</span>
+      </button>
+      <button class="sb-link" data-section="teams" onclick="switchSection('teams')">
+        <span class="sb-icon">⊕</span><span>Teams</span>
+      </button>
+      <button class="sb-link" data-section="wins" onclick="switchSection('wins')">
+        <span class="sb-icon">🏆</span><span>Wins</span>
+      </button>
+      <button class="sb-link" data-section="events" onclick="switchSection('events')">
+        <span class="sb-icon">◎</span><span>Events</span>
+      </button>
+      <button class="sb-link" data-section="ticker" onclick="switchSection('ticker')">
+        <span class="sb-icon">▶</span><span>Ticker</span>
+      </button>
+      <button class="sb-link" data-section="log" onclick="switchSection('log')">
+        <span class="sb-icon">⌥</span><span>Activity Log</span>
+      </button>
+    </nav>
+    <button class="sb-logout" onclick="adminLogout()">← Log Out</button>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- ── DASHBOARD ── -->
+    <section id="sec-dashboard" class="admin-section active">
+      <div class="sec-header">
+        <div class="sec-title-block">
+          <div class="sec-label">Overview</div>
+          <div class="sec-title">DASHBOARD</div>
+        </div>
+      </div>
+      <div class="dash-stats">
+        <div class="dash-stat">
+          <div class="ds-label">Pending Apps</div>
+          <div class="ds-num red" id="dash-pending">—</div>
+        </div>
+        <div class="dash-stat">
+          <div class="ds-label">Members</div>
+          <div class="ds-num green" id="dash-members">—</div>
+        </div>
+        <div class="dash-stat">
+          <div class="ds-label">Projects</div>
+          <div class="ds-num blue" id="dash-projects">—</div>
+        </div>
+        <div class="dash-stat">
+          <div class="ds-label">Wins</div>
+          <div class="ds-num amber" id="dash-wins">—</div>
+        </div>
+      </div>
+      <div class="dash-recent-label">Recent Applications</div>
+      <div id="dash-recent-apps"><div class="loading-state">Loading…</div></div>
+    </section>
+
+    <!-- ── APPLICATIONS ── -->
+    <section id="sec-applications" class="admin-section">
+      <div class="sec-header">
+        <div class="sec-title-block">
+          <div class="sec-label">Review</div>
+          <div class="sec-title">APPLICATIONS</div>
+          <div class="sec-sub">Click a row to expand details, review submission, and approve or reject.</div>
+        </div>
+      </div>
+      <div class="filter-bar-admin">
+        <button class="fba-btn active" onclick="filterApps('all',this)">All</button>
+        <button class="fba-btn"        onclick="filterApps('pending',this)">Pending</button>
+        <button class="fba-btn"        onclick="filterApps('approved',this)">Approved</button>
+        <button class="fba-btn"        onclick="filterApps('rejected',this)">Rejected</button>
+      </div>
+      <div id="apps-container"><div class="loading-state">Loading…</div></div>
+    </section>
+
+    <!-- ── PROJECTS ── -->
+    <section id="sec-projects" class="admin-section">
+      <div class="sec-header">
+        <div class="sec-title-block">
+          <div class="sec-label">Output</div>
+          <div class="sec-title">PROJECTS</div>
+        </div>
+        <button class="btn btn-red" onclick="openProjectModal()">+ Add Project</button>
+      </div>
+      <div class="filter-bar-admin">
+        <button class="fba-btn active" onclick="filterAdminCards('all',this,'proj-card-admin')">All</button>
+        <button class="fba-btn"        onclick="filterAdminCards('building',this,'proj-card-admin')">Building</button>
+        <button class="fba-btn"        onclick="filterAdminCards('shipped',this,'proj-card-admin')">Shipped</button>
+      </div>
+      <div class="admin-cards" id="admin-projects-grid"><div class="loading-state" style="grid-column:1/-1">Loading…</div></div>
+    </section>
+
+    <!-- ── TEAMS ── -->
+    <section id="sec-teams" class="admin-section">
+      <div class="sec-header">
+        <div class="sec-title-block">
+          <div class="sec-label">Structure</div>
+          <div class="sec-title">TEAMS</div>
+          <div class="sec-sub">Edit team info, members, focus, and status.</div>
+        </div>
+      </div>
+      <div class="teams-admin-list" id="admin-teams-list"><div class="loading-state">Loading…</div></div>
+    </section>
+
+    <!-- ── WINS ── -->
+    <section id="sec-wins" class="admin-section">
+      <div class="sec-header">
+        <div class="sec-title-block">
+          <div class="sec-label">Trophy Wall</div>
+          <div class="sec-title">WINS</div>
+        </div>
+        <button class="btn btn-red" onclick="openWinModal()">+ Add Win</button>
+      </div>
+      <div class="admin-cards" id="admin-wins-grid"><div class="loading-state" style="grid-column:1/-1">Loading…</div></div>
+    </section>
+
+    <!-- ── EVENTS ── -->
+    <section id="sec-events" class="admin-section">
+      <div class="sec-header">
+        <div class="sec-title-block">
+          <div class="sec-label">Upcoming</div>
+          <div class="sec-title">EVENTS</div>
+          <div class="sec-sub">Competitions and deadlines shown on the home page.</div>
+        </div>
+        <button class="btn btn-red" onclick="openEventModal()">+ Add Event</button>
+      </div>
+      <div class="events-admin-list" id="admin-events-list"><div class="loading-state">Loading…</div></div>
+    </section>
+
+    <!-- ── TICKER ── -->
+    <section id="sec-ticker" class="admin-section">
+      <div class="sec-header">
+        <div class="sec-title-block">
+          <div class="sec-label">Marquee</div>
+          <div class="sec-title">TICKER</div>
+          <div class="sec-sub">Messages scrolling across the top of every page.</div>
+        </div>
+        <button class="btn btn-red" onclick="openTickerModal()">+ Add Item</button>
+      </div>
+      <div class="ticker-list" id="admin-ticker-list"><div class="loading-state">Loading…</div></div>
+    </section>
+
+    <!-- ── ACTIVITY LOG ── -->
+    <section id="sec-log" class="admin-section">
+      <div class="sec-header">
+        <div class="sec-title-block">
+          <div class="sec-label">Commits</div>
+          <div class="sec-title">ACTIVITY LOG</div>
+          <div class="sec-sub">Entries shown on the home page commit log.</div>
+        </div>
+        <button class="btn btn-red" onclick="openLogModal()">+ Add Entry</button>
+      </div>
+      <div class="log-admin-list" id="admin-log-list"><div class="loading-state">Loading…</div></div>
+    </section>
+
+  </main>
+</div><!-- /admin-panel -->
+
+<!-- ─── MODAL ─── -->
+<div id="modal-overlay" onclick="closeModal(event)">
+  <div id="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">—</div>
+      <button class="modal-close" onclick="closeModal()">✕ close</button>
+    </div>
+    <div id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="admin.js"></script>
+</body>
+</html>

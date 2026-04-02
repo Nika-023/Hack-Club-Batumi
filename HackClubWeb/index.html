@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HackClub Batumi — We Ship. We Win.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="main-nav">
+  <button class="nav-logo" onclick="showPage('home')" aria-label="Home">
+    // <span>HACKCLUB</span>&nbsp;BATUMI
+  </button>
+
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="nav-links" id="nav-links">
+    <button class="nav-link active" id="nav-home"     onclick="showPage('home');closeMobileNav()">Home</button>
+    <button class="nav-link"        id="nav-projects"  onclick="showPage('projects');closeMobileNav()">Projects</button>
+    <button class="nav-link"        id="nav-teams"     onclick="showPage('teams');closeMobileNav()">Teams</button>
+    <button class="nav-link"        id="nav-wins"      onclick="showPage('wins');closeMobileNav()">Wins</button>
+    <div class="nav-divider"></div>
+    <button class="nav-link"        id="nav-account"   onclick="showPage('account');closeMobileNav()" style="display:none">Account</button>
+    <button class="nav-link"        id="nav-login"     onclick="showPage('login');closeMobileNav()">Login</button>
+    <button class="nav-apply"       onclick="showPage('apply');closeMobileNav()">Apply →</button>
+  </div>
+</nav>
+
+<!-- ─── TICKER ─── -->
+<div class="ticker-bar">
+  <div class="ticker-inner" id="ticker-inner">
+    <!-- Populated by app.js from Supabase ticker_items table -->
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  PAGE: HOME
+════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+  <div class="container">
+    <div class="hero">
+      <div class="hero-eyebrow">
+        <div class="hero-dot"></div>
+        <span>Recruiting — Q2 2026 — Batumi, Georgia</span>
+      </div>
+      <h1>
+        NO <span class="x">BEGINNERS</span>.<br>
+        NO <span class="x">LECTURES</span>.<br>
+        JUST <span class="r">BUILDING</span>.
+      </h1>
+      <p class="hero-desc">
+        We are a <strong>maker collective</strong> from Batumi — engineers, builders, and problem-solvers
+        grouped by domain. We ship real projects, win hackathons, and compete in YSWS together.
+        <strong>You must prove you belong here.</strong>
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-red" onclick="showPage('apply')">Apply Now →</button>
+        <button class="btn btn-ghost" onclick="showPage('projects')">See Our Projects</button>
+      </div>
+      <div class="hero-stats">
+        <div class="h-stat"><div class="h-stat-n">6<em>+</em></div><div class="h-stat-l">Domains</div></div>
+        <div class="h-stat"><div class="h-stat-n">12<em>+</em></div><div class="h-stat-l">Projects Shipped</div></div>
+        <div class="h-stat"><div class="h-stat-n">3<em>×</em></div><div class="h-stat-l">Hackathon Wins</div></div>
+        <div class="h-stat"><div class="h-stat-n">0<em>%</em></div><div class="h-stat-l">Beginners</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="manifesto">
+    <div class="container">
+      <div class="manifesto-inner">
+        <div class="manifesto-left">
+          <div class="s-label">Manifesto</div>
+          <div class="s-title">HOW WE OPERATE</div>
+          <p class="s-sub" style="margin-top:1rem">Six rules that define everyone in this club.</p>
+        </div>
+        <div class="manifesto-points">
+          <div class="m-point"><div class="m-num">01</div><div><div class="m-title">You ship or you leave</div><div class="m-text">Every member contributes to at least one shipped project per quarter. No exceptions.</div></div></div>
+          <div class="m-point"><div class="m-num">02</div><div><div class="m-title">No hand-holding</div><div class="m-text">You are expected to be self-sufficient. Teammates help, but nobody carries you.</div></div></div>
+          <div class="m-point"><div class="m-num">03</div><div><div class="m-title">Real projects only</div><div class="m-text">Everything we build is open source, deployed, or submitted to a real competition.</div></div></div>
+          <div class="m-point"><div class="m-num">04</div><div><div class="m-title">Win as a collective</div><div class="m-text">Every hackathon, every competition — we enter under one name. Batumi wins.</div></div></div>
+          <div class="m-point"><div class="m-num">05</div><div><div class="m-title">Prove yourself first</div><div class="m-text">Everyone goes through the same exam regardless of reputation. Output speaks.</div></div></div>
+          <div class="m-point" style="border-bottom:none"><div class="m-num">06</div><div><div class="m-title">Be obsessive</div><div class="m-text">We want people who stay up until 2am because they can't stop. That energy wins.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="s-label">Latest Shipped</div>
+      <div class="s-title">RECENT PROJECTS</div>
+      <!-- Populated by app.js -->
+      <div class="preview-grid" id="home-projects-grid">
+        <div class="preview-card skeleton"></div>
+        <div class="preview-card skeleton"></div>
+        <div class="preview-card skeleton"></div>
+      </div>
+      <div class="section-cta">
+        <button class="btn btn-ghost" onclick="showPage('projects')">View All Projects →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOG PANEL -->
+  <div class="log-panel">
+    <div class="container">
+      <div class="log-inner">
+        <div class="log-col">
+          <div class="s-label">Activity</div>
+          <div class="log-subtitle">Live club commit log</div>
+          <!-- Populated by app.js -->
+          <div class="log-entries" id="home-log"></div>
+        </div>
+        <div class="log-col">
+          <div class="s-label">Upcoming</div>
+          <div class="log-subtitle">Competitions &amp; deadlines</div>
+          <!-- Populated by app.js -->
+          <div class="log-entries" id="home-events"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="foot-logo">// HACKCLUB BATUMI</div><div class="foot-tagline">We ship. We win. We repeat.</div></footer>
+</div>
+
+<!-- ════════════════════════════════════════
+  PAGE: PROJECTS
+════════════════════════════════════════ -->
+<div class="page" id="page-projects">
+  <div class="container">
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div><div class="s-label">Output</div><div class="s-title">PROJECTS</div><p class="s-sub">Everything we've shipped, won with, or are currently building.</p></div>
+        <div class="page-hero-stat"><div class="stat-label">TOTAL OUTPUT</div><div class="stat-num accent" id="projects-total">—</div><div class="stat-sub">projects · all time</div></div>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterProjects('all',this)">All</button>
+        <button class="filter-btn" onclick="filterProjects('web',this)">Web Dev</button>
+        <button class="filter-btn" onclick="filterProjects('pcb',this)">Electronics</button>
+        <button class="filter-btn" onclick="filterProjects('cad',this)">CAD</button>
+        <button class="filter-btn" onclick="filterProjects('robotics',this)">Robotics</button>
+        <button class="filter-btn" onclick="filterProjects('ml',this)">ML/AI</button>
+        <button class="filter-btn" onclick="filterProjects('game',this)">Game Dev</button>
+      </div>
+    </div>
+
+    <div class="section-inner">
+      <div class="building-label"><span class="pulse" style="background:var(--green)"></span>Currently Building</div>
+      <!-- Populated by app.js -->
+      <div class="building-cards" id="building-cards"></div>
+
+      <div class="building-label" style="color:var(--muted);margin-top:2.5rem">// shipped</div>
+      <!-- Populated by app.js -->
+      <div class="projects-grid" id="projects-grid"></div>
+    </div>
+  </div>
+  <footer><div class="foot-logo">// HACKCLUB BATUMI</div><div class="foot-tagline">We ship. We win. We repeat.</div></footer>
+</div>
+
+<!-- ════════════════════════════════════════
+  PAGE: TEAMS
+════════════════════════════════════════ -->
+<div class="page" id="page-teams">
+  <div class="container">
+    <div class="page-hero"><div class="s-label">Structure</div><div class="s-title">TEAMS</div><p class="s-sub">Six independent groups. Each led by someone obsessive. Each building something real.</p></div>
+    <!-- Populated by app.js -->
+    <div class="teams-grid" id="teams-grid"></div>
+    <div class="teams-footer-note">
+      <p>Don't fit any group? Think a new domain should exist?</p>
+      <button class="btn btn-red" onclick="showPage('apply')">Propose a New Domain →</button>
+    </div>
+  </div>
+  <footer><div class="foot-logo">// HACKCLUB BATUMI</div><div class="foot-tagline">We ship. We win. We repeat.</div></footer>
+</div>
+
+<!-- ════════════════════════════════════════
+  PAGE: WINS
+════════════════════════════════════════ -->
+<div class="page" id="page-wins">
+  <div class="container">
+    <div class="page-hero">
+      <div class="s-label">Track Record</div>
+      <div class="wins-hero-inner">
+        <div><div class="s-title">WINS</div><p class="s-sub">Our record in competitions and open source.</p>
+          <div class="wins-counters">
+            <div class="wc"><div class="wc-n" id="wins-first-count">—</div><div class="wc-l">1st Places</div></div>
+            <div class="wc"><div class="wc-n" id="wins-total-count">—</div><div class="wc-l">Competitions</div></div>
+            <div class="wc"><div class="wc-n" id="wins-ysws-count">—</div><div class="wc-l">YSWS Grants</div></div>
+          </div>
+        </div>
+        <div class="wins-right">
+          <div class="wins-bignum" id="wins-rate">—/—</div>
+          <div class="wins-biglabel">Win rate across all entered competitions</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-inner">
+      <div class="s-label">Trophy Wall</div><div class="s-title">HALL OF WINS</div>
+      <!-- Populated by app.js -->
+      <div class="trophy-grid" id="trophy-grid"></div>
+    </div>
+  </div>
+  <footer><div class="foot-logo">// HACKCLUB BATUMI</div><div class="foot-tagline">We ship. We win. We repeat.</div></footer>
+</div>
+
+<!-- ════════════════════════════════════════
+  PAGE: APPLY
+════════════════════════════════════════ -->
+<div class="page" id="page-apply">
+  <div class="container">
+    <div class="page-hero">
+      <div class="s-label">Join</div>
+      <div class="s-title">APPLY</div>
+      <p class="s-sub">Three steps. Takes about 5 minutes to start.</p>
+    </div>
+
+    <div class="wizard-progress">
+      <div class="wizard-step active" id="ws-1"><div class="ws-num">1</div><div class="ws-label">Pick Your Domain</div></div>
+      <div class="wizard-line"></div>
+      <div class="wizard-step" id="ws-2"><div class="ws-num">2</div><div class="ws-label">Your Info</div></div>
+      <div class="wizard-line"></div>
+      <div class="wizard-step" id="ws-3"><div class="ws-num">3</div><div class="ws-label">Your Challenge</div></div>
+      <div class="wizard-line"></div>
+      <div class="wizard-step" id="ws-4"><div class="ws-num">4</div><div class="ws-label">Submit</div></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="wizard-pane active" id="wpane-1">
+      <h2 class="wizard-title">What do you build?</h2>
+      <p class="wizard-sub">Pick the group that matches your skills. You can only apply to one at a time.</p>
+      <div class="domain-pick-grid" id="domain-pick-grid">
+        <div style="grid-column:1/-1;color:var(--muted);font-family:var(--mono);font-size:.78rem">Loading domains…</div>
+      </div>
+      <div class="wizard-nav">
+        <div></div>
+        <button class="btn btn-red" id="step1-next" onclick="goStep(2)" disabled>Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="wizard-pane" id="wpane-2">
+      <h2 class="wizard-title">Tell us about yourself</h2>
+      <p class="wizard-sub">This stays private — only group leaders and the admin see it.</p>
+      <div class="form-grid">
+        <div class="form-field">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" id="f-name" type="text" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" id="f-email" type="email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Age <span class="form-hint">(13–18 only)</span></label>
+          <select class="form-input" id="f-age">
+            <option value="">Select your age</option>
+            <option>13</option><option>14</option><option>15</option>
+            <option>16</option><option>17</option><option>18</option>
+          </select>
+        </div>
+        <div class="form-field full">
+          <label class="form-label">Something you've built <span class="form-hint">(link to a project, GitHub, etc.)</span></label>
+          <input class="form-input" id="f-portfolio" type="url" placeholder="https://github.com/you or https://yourproject.com">
+        </div>
+      </div>
+      <div class="form-error" id="step2-error" style="display:none"></div>
+      <div class="wizard-nav">
+        <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
+        <button class="btn btn-red" onclick="goStep(3)">Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="wizard-pane" id="wpane-3">
+      <h2 class="wizard-title">Your Challenge</h2>
+      <p class="wizard-sub">This is your exam. Read it carefully. Take your time to do it well.</p>
+      <div class="challenge-card" id="challenge-card">
+        <div class="challenge-domain" id="challenge-domain"></div>
+        <div class="challenge-prompt" id="challenge-prompt"></div>
+        <div class="challenge-accepts">
+          <div class="ca-label">What to submit:</div>
+          <div class="ca-list" id="challenge-accepts"></div>
+        </div>
+        <div class="challenge-note">
+          You have <strong>48 hours</strong> from now. Work at your own pace.
+          When you're ready, click Next to submit.
+        </div>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn btn-ghost" onclick="goStep(2)">← Back</button>
+        <button class="btn btn-red" onclick="goStep(4)">I've Completed the Challenge →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="wizard-pane" id="wpane-4">
+      <h2 class="wizard-title">Submit Your Work</h2>
+      <p class="wizard-sub">Paste a link or upload a file. Either works.</p>
+      <div class="submit-options">
+        <div class="submit-option" id="so-link">
+          <div class="so-header" onclick="toggleSubmitMode('link')">
+            <div class="so-radio" id="sor-link"></div>
+            <div class="so-title">Paste a Link</div>
+            <div class="so-sub">GitHub repo, live URL, Google Drive, YouTube, itch.io</div>
+          </div>
+          <div class="so-body" id="sob-link">
+            <input class="form-input" id="f-link" type="url" placeholder="https://github.com/you/yourproject">
+          </div>
+        </div>
+        <div class="submit-option" id="so-file">
+          <div class="so-header" onclick="toggleSubmitMode('file')">
+            <div class="so-radio" id="sor-file"></div>
+            <div class="so-title">Upload a File</div>
+            <div class="so-sub">PDF, ZIP, Gerber files — max 10MB</div>
+          </div>
+          <div class="so-body" id="sob-file" style="display:none">
+            <label class="file-drop" id="file-drop" for="f-file">
+              <div class="fd-icon">↑</div>
+              <div class="fd-text">Click to choose file or drag &amp; drop</div>
+              <div class="fd-types">PDF · ZIP · STL · Gerber</div>
+              <input type="file" id="f-file" accept=".pdf,.zip,.stl,.step,.gerber,.gbr" style="display:none" onchange="handleFileSelect(this)">
+            </label>
+            <div class="file-selected" id="file-selected" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-field" style="margin-top:1.5rem">
+        <label class="form-label">Short note <span class="form-hint">(optional — what was the hardest part?)</span></label>
+        <textarea class="form-input" id="f-note" rows="3" placeholder="Describe your approach or anything the reviewer should know..."></textarea>
+      </div>
+      <div class="form-error" id="step4-error" style="display:none"></div>
+      <div class="wizard-nav">
+        <button class="btn btn-ghost" onclick="goStep(3)">← Back</button>
+        <button class="btn btn-red" id="submit-btn" onclick="submitApplication()">Submit Application →</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="wizard-pane" id="wpane-done">
+      <div class="success-state">
+        <div class="success-icon">✓</div>
+        <h2 class="success-title">Application Submitted</h2>
+        <p class="success-text">Your submission is with the <strong id="success-domain"></strong> group leader. Expect a response within 48 hours at <strong id="success-email"></strong>.</p>
+        <p class="success-sub">While you wait — check out what the club is building:</p>
+        <button class="btn btn-ghost" onclick="showPage('projects')">See Our Projects →</button>
+      </div>
+    </div>
+  </div>
+  <footer><div class="foot-logo">// HACKCLUB BATUMI</div><div class="foot-tagline">We ship. We win. We repeat.</div></footer>
+</div>
+
+<!-- ════════════════════════════════════════
+  PAGE: LOGIN / REGISTER
+════════════════════════════════════════ -->
+<div class="page" id="page-login">
+  <div class="container">
+    <div class="auth-wrap">
+      <div class="auth-brand" onclick="showPage('home')">// HACKCLUB BATUMI</div>
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Login</button>
+          <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Register</button>
+        </div>
+
+        <div class="auth-pane active" id="apane-login">
+          <p class="auth-desc">Members only. Applied and approved? Log in below.</p>
+          <div class="form-field">
+            <label class="form-label">Email</label>
+            <input class="form-input" id="login-email" type="email" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Password</label>
+            <input class="form-input" id="login-password" type="password" placeholder="••••••••" autocomplete="current-password">
+          </div>
+          <div class="form-error" id="login-error" style="display:none"></div>
+          <button class="btn btn-red full-btn" onclick="doLogin()">Log In →</button>
+          <div class="auth-alt">
+            <button class="auth-alt-link" onclick="doMagicLink()">Send me a magic link instead</button>
+          </div>
+        </div>
+
+        <div class="auth-pane" id="apane-register">
+          <p class="auth-desc">Only approved applicants can register. If you haven't applied yet, <button class="inline-link" onclick="showPage('apply')">apply here</button>.</p>
+          <div class="form-field">
+            <label class="form-label">Email <span class="form-hint">(same as your application)</span></label>
+            <input class="form-input" id="reg-email" type="email" placeholder="you@example.com">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Set Password</label>
+            <input class="form-input" id="reg-password" type="password" placeholder="Min. 8 characters">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Confirm Password</label>
+            <input class="form-input" id="reg-password2" type="password" placeholder="Repeat password">
+          </div>
+          <div class="form-error" id="register-error" style="display:none"></div>
+          <button class="btn btn-red full-btn" onclick="doRegister()">Create Account →</button>
+        </div>
+      </div>
+      <div class="auth-footer">Not a member yet? <button class="inline-link" onclick="showPage('apply')">Apply to join →</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  PAGE: ACCOUNT
+════════════════════════════════════════ -->
+<div class="page" id="page-account">
+  <div class="container">
+    <div class="page-hero">
+      <div class="s-label">Member</div>
+      <div class="account-header">
+        <div class="account-avatar" id="acct-avatar">??</div>
+        <div>
+          <div class="s-title" id="acct-name">Loading…</div>
+          <div class="account-meta">
+            <span class="badge badge-blue" id="acct-domain">—</span>
+            <span class="badge badge-muted" id="acct-role">—</span>
+            <span class="acct-join" id="acct-join"></span>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="doLogout()">Log Out</button>
+      </div>
+    </div>
+
+    <div class="account-grid">
+      <div class="account-section">
+        <div class="s-label">Logbook</div>
+        <div class="s-title" style="font-size:1.6rem">MY CONTRIBUTIONS</div>
+        <!-- Populated by auth.js -->
+        <div class="logbook-entries" id="logbook-entries">
+          <div class="lb-entry"><div class="lb-dot"></div><div class="lb-content"><div class="lb-title" style="color:var(--muted)">Loading…</div></div></div>
+        </div>
+      </div>
+
+      <div class="account-section">
+        <div class="s-label">Your Stats</div>
+        <div class="acct-stats" id="acct-stats">
+          <div class="acct-stat"><div class="as-n" id="acct-stat-projects">—</div><div class="as-l">Projects</div></div>
+          <div class="acct-stat"><div class="as-n" id="acct-stat-wins">—</div><div class="as-l">YSWS Wins</div></div>
+          <div class="acct-stat"><div class="as-n" id="acct-stat-months">—</div><div class="as-l">Active</div></div>
+        </div>
+
+        <div class="s-label" style="margin-top:2rem">My Group</div>
+        <div class="group-card" id="acct-group-card">
+          <div class="gc-name" id="gc-name">—</div>
+          <div class="gc-meta" id="gc-meta"></div>
+          <div class="gc-focus" id="gc-focus"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="account-tasks">
+      <div class="s-label">Club Activity</div>
+      <!-- Populated by app.js (events from DB) -->
+      <div class="task-list" id="acct-task-list"></div>
+    </div>
+  </div>
+  <footer><div class="foot-logo">// HACKCLUB BATUMI</div><div class="foot-tagline">We ship. We win. We repeat.</div></footer>
+</div>
+
+<!-- Supabase CDN must load before deferred scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/auth.js" defer></script>
+<script src="js/app.js" defer></script>
+</body>
+</html>
